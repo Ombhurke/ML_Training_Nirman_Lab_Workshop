@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+# Data Files
+*.csv
+*.xlsx
+
+# Large artifacts (Optional: remove if you want to use Git LFS)
+# If you intend to commit the models directly, remove the lines below.
+# *.joblib
