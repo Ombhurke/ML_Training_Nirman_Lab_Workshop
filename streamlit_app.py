@@ -2,6 +2,13 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
+import sklearn.compose._column_transformer as ct
+
+# Backward compatibility fix for unpickling ColumnTransformer across scikit-learn versions
+if not hasattr(ct, '_RemainderColsList'):
+    class _RemainderColsList:
+        pass
+    ct._RemainderColsList = _RemainderColsList
 
 # Set page configuration
 st.set_page_config(
@@ -28,7 +35,8 @@ try:
     preprocessor, model = load_artifacts()
     st.success("Model artifacts loaded successfully!")
 except Exception as e:
-    st.error(f"Error loading models. Please ensure 'preprocessor.joblib' and 'best_random_forest_model.joblib' are present in the directory.")
+    st.error(f"Error loading models: {e}")
+    st.exception(e)
     st.stop()
 
 # Create Sidebar / Input form
